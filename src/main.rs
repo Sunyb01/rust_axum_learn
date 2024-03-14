@@ -1,6 +1,7 @@
 mod configs;
 mod model;
 mod router;
+mod service;
 
 use configs::APP_CONFIG;
 
