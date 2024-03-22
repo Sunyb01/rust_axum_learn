@@ -495,6 +495,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c198f91728a82281a64e1f4f9eeb25d82cb32a5de251c6bd1b5154d63a8e7bd"
 
 [[package]]
+name = "linkcrawler"
+version = "0.1.0"
+
+[[package]]
 name = "linked-hash-map"
 version = "0.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1112,6 +1116,7 @@ dependencies = [
  "app",
  "axum",
  "config",
+ "linkcrawler",
  "serde",
  "tokio",
  "toml",
