@@ -13,4 +13,4 @@ serde = { version = "1.0.197", features = ["derive"] }
 toml = "0.8.11"
 config = "0.14.0"
 app = { path = "../app" }
-linkcrawler = { path = "../linkcrawler" }
+server = { path = "../server" }

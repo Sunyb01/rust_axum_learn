@@ -4,7 +4,7 @@ use crate::model::ResponseResult;
 use axum::{extract::Query, routing::get, Json, Router};
 use std::collections::HashMap;
 
-pub fn init_and_regist() -> Router {
+pub fn init_and_register_router() -> Router {
     return Router::new()
         .route("/", get(|| async { "Hello, World!" }))
         .route(
