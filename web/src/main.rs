@@ -1,3 +1,5 @@
+// 导入库crate
+extern crate web;
 mod configs;
 mod model;
 mod router;
@@ -10,6 +12,7 @@ use tokio::net::TcpListener;
 
 #[tokio::main]
 async fn main() {
+    web::web_lib_hello();
     app::hello_web();
     server::hello();
     let _ = APP_CONFIG.get_or_init(|| configs::load_properties());
