@@ -31,6 +31,7 @@ mod tests {
         let s1 = String::from("hello");
         let fn_once_func = || {
             println!("--{s1}--");
+            std::mem::drop(s1);
         };
 
         fn_once_func();
