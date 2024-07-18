@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
 
-    // 'a: 'c 表示'a的生命周期大于'c的生命周期
+    // 'a: 'c 表示'a的至少要活的和'c一样长
     fn longer_lifetiem<'a, 'b, 'c>(s1: &'a str, s2: &'b str) -> &'c str
     where
         'a: 'c,
