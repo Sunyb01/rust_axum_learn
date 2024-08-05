@@ -93,6 +93,7 @@ async fn handle_client(stream: TcpStream) -> io::Result<()> {
 }
 
 fn main() {
+    // 这个示例只能在linux平台上跑, 因为epoll是linux平台上的实现
     init_log();
 
     let (executor, spawner) = new_executor_and_spawner();
