@@ -1,4 +1,4 @@
 
 [workspace]
-members = ["app", "server", "web"]
+members = ["app", "echo", "server", "web"]
 resolver = "2"
