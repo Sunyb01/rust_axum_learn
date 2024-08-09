@@ -1,4 +1,4 @@
 
 [workspace]
-members = ["app", "cli", "server", "web"]
+members = [ "actix_web","app", "cli", "server", "web"]
 resolver = "2"
