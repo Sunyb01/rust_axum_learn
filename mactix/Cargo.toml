@@ -8,3 +8,11 @@ edition = "2021"
 actix-web = "4.7.0"
 actix-http = "3.7.0"
 actix-rt = "2.9.0"
+serde = { version = "1.0.197", features = ["derive"] }
+sqlx = { version = "0.8.0", default-features = false, features = [
+    "runtime-async-std",
+    "mysql",
+    "macros",
+    "chrono",
+] }
+config = "0.14.0"

@@ -7,4 +7,4 @@ password = "CompassBag2024"
 
 [server]
 host = "localhost"
-port = 8899
+port = 8000
