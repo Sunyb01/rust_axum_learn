@@ -10,6 +10,7 @@ pub mod repository;
 pub mod router;
 
 use actix_web::{
+    get,
     web::{Data, Form, Json},
     HttpRequest, HttpResponse, Responder,
 };
@@ -46,6 +47,7 @@ pub async fn index4(info: Form<pojo::Info>) -> String {
     format!("Welcome {} By from!", info.username)
 }
 
+#[get("/persistence1")]
 pub async fn persistence1(data: Data<AppState>) -> impl Responder {
     HttpResponse::Ok()
 }

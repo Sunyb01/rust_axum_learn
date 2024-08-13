@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
             .service(router::index1)
             // 使用宏 + scope
             .service(web::scope("/index").service(router::index2))
-            .service(web::scope("persistence").service(factory))
+            .service(web::scope("persistence").service(mactix::persistence1))
     })
     .bind(
         mactix::config::APP_CONFIG
