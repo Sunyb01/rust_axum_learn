@@ -1,10 +1,13 @@
-[database]
-url = "rm-bp10k05378cuq9109wo.mysql.rds.aliyuncs.com"
-port = 3306
-database = "compass_bag_dev"
-username = "compass_bag_dev"
-password = "CompassBag2024"
-
+# server
 [server]
 host = "localhost"
 port = 8000
+
+
+# database
+[database]
+host = "rm-bp10k05378cuq9109wo.mysql.rds.aliyuncs.com"
+port = 3306
+user = "compass_bag_dev"
+password = "CompassBag2024"
+dbname = "compass_bag_dev"

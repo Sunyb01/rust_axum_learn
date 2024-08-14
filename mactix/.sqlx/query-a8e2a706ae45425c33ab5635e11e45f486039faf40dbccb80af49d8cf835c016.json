@@ -1,0 +1,94 @@
+{
+  "db_name": "MySQL",
+  "query": "SELECT id, department_id, department_name, parent_department_id, sub_department_id, gmt_create, gmt_modify, is_deleted FROM ding_department where is_deleted = 0 ORDER by id LIMIT ? OFFSET ?",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": {
+          "type": "LongLong",
+          "flags": "NOT_NULL | PRIMARY_KEY | AUTO_INCREMENT",
+          "max_size": 20
+        }
+      },
+      {
+        "ordinal": 1,
+        "name": "department_id",
+        "type_info": {
+          "type": "LongLong",
+          "flags": "NOT_NULL | UNIQUE_KEY",
+          "max_size": 20
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "department_name",
+        "type_info": {
+          "type": "VarString",
+          "flags": "NOT_NULL | NO_DEFAULT_VALUE",
+          "max_size": 800
+        }
+      },
+      {
+        "ordinal": 3,
+        "name": "parent_department_id",
+        "type_info": {
+          "type": "LongLong",
+          "flags": "NOT_NULL",
+          "max_size": 20
+        }
+      },
+      {
+        "ordinal": 4,
+        "name": "sub_department_id",
+        "type_info": {
+          "type": "VarString",
+          "flags": "",
+          "max_size": 8000
+        }
+      },
+      {
+        "ordinal": 5,
+        "name": "gmt_create",
+        "type_info": {
+          "type": "Datetime",
+          "flags": "NOT_NULL | BINARY",
+          "max_size": 19
+        }
+      },
+      {
+        "ordinal": 6,
+        "name": "gmt_modify",
+        "type_info": {
+          "type": "Datetime",
+          "flags": "NOT_NULL | BINARY",
+          "max_size": 19
+        }
+      },
+      {
+        "ordinal": 7,
+        "name": "is_deleted",
+        "type_info": {
+          "type": "Tiny",
+          "flags": "NOT_NULL",
+          "max_size": 1
+        }
+      }
+    ],
+    "parameters": {
+      "Right": 2
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "a8e2a706ae45425c33ab5635e11e45f486039faf40dbccb80af49d8cf835c016"
+}

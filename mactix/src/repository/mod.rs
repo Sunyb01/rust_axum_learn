@@ -1,3 +1,6 @@
+mod dingtalk;
+pub use dingtalk::get_ding_depts;
+
 use super::config::APP_CONFIG;
 
 use sqlx::mysql::{MySqlPool, MySqlPoolOptions};

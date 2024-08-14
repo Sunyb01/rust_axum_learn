@@ -5,49 +5,13 @@
 //!
 
 pub mod config;
+pub mod model;
 pub mod pojo;
 pub mod repository;
 pub mod router;
-
-use actix_web::{
-    get,
-    web::{Data, Form, Json},
-    HttpRequest, HttpResponse, Responder,
-};
 
 use sqlx::mysql::MySqlPool;
 
 pub struct AppState {
     pub db: MySqlPool,
-}
-
-pub async fn greet(req: HttpRequest) -> impl Responder {
-    let name = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", &name)
-}
-
-pub async fn health_check() -> impl Responder {
-    HttpResponse::Ok()
-}
-
-pub async fn router_hello() -> impl Responder {
-    router::routers_hello();
-    HttpResponse::Ok()
-}
-
-pub async fn subscribe() -> HttpResponse {
-    HttpResponse::Ok().finish()
-}
-
-pub async fn index3(info: Json<pojo::Info>) -> String {
-    format!("Welcome {}!", info.username)
-}
-
-pub async fn index4(info: Form<pojo::Info>) -> String {
-    format!("Welcome {} By from!", info.username)
-}
-
-#[get("/persistence1")]
-pub async fn persistence1(data: Data<AppState>) -> impl Responder {
-    HttpResponse::Ok()
 }
