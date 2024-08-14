@@ -21,7 +21,6 @@ impl Default for ApplicationProperties {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[warn(dead_code)]
 pub struct Database {
     url: String,
     port: i32,
@@ -33,7 +32,7 @@ pub struct Database {
 impl Default for Database {
     fn default() -> Self {
         Database {
-            url: String::from("http://localhost"),
+            url: String::from(""),
             port: 3306,
             database: String::from(""),
             username: String::from(""),
@@ -48,7 +47,7 @@ impl Database {
     }
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Server {
     host: String,
     port: i32,
@@ -71,7 +70,8 @@ impl Server {
 
 fn get_config() -> ApplicationProperties {
     let settings = Config::builder()
-        .add_source(File::with_name("config.toml"))
+        // mactix/config.toml ==> mactix下的config.toml
+        .add_source(File::with_name("mactix/config.toml"))
         .build()
         .expect("构建配置错误");
     settings

@@ -1,5 +1,8 @@
+//!
+//! 入口
+//!
 use actix_web::{web, App, HttpServer};
-
+use log4rs;
 use mactix::router;
 // 导入库 crate, tests才可以测试
 // 详情可查看 https://kaisery.github.io/trpl-zh-cn/ch11-03-test-organization.html  ==> 二进制 crate 的集成测试
@@ -7,6 +10,8 @@ extern crate mactix;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    // 初始化日志, mactix/log4rs.yaml ==> mactix下的log4rs.yaml
+    log4rs::init_file("mactix/log4rs.yaml", Default::default()).unwrap();
     // 初始化配置
     mactix::config::init_config();
     // 初始化数据库
@@ -27,6 +32,7 @@ async fn main() -> std::io::Result<()> {
             // 使用宏 + scope
             .service(web::scope("/index").service(router::index2))
             .service(web::scope("persistence").service(router::persistence1))
+            .service(web::scope("/log").service(router::log_test))
     })
     .bind(
         mactix::config::APP_CONFIG

@@ -63,7 +63,7 @@ impl Server {
 
 pub fn load_properties() -> ApplicationProperties {
     let config = Config::builder()
-        .add_source(File::with_name("config.toml"))
+        .add_source(File::with_name("web/config.toml"))
         .build()
         .expect("构建配置错误");
 

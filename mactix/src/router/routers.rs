@@ -2,10 +2,12 @@
 
 use actix_web::{
     get,
+    post,
     web::{Data, Form, Json},
     HttpRequest, HttpResponse, Responder,
 };
 
+use logs::{info, error};
 use crate::AppState;
 use crate::{pojo, repository};
 
@@ -53,4 +55,11 @@ pub async fn index4(info: Form<pojo::Info>) -> String {
 pub async fn persistence1(data: Data<AppState>) -> impl Responder {
     let depts = repository::get_ding_depts(data, 0, 10).await;
     HttpResponse::Ok().json(depts)
+}
+
+#[post("/log")]
+pub async fn log_test() -> impl Responder {
+    info!("this is info");
+    error!("this is error");
+    HttpResponse::Ok()
 }
