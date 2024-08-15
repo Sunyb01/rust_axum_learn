@@ -9,6 +9,7 @@ pub mod model;
 pub mod pojo;
 pub mod repository;
 pub mod router;
+pub mod common;
 
 use sqlx::mysql::MySqlPool;
 

@@ -1,7 +1,7 @@
 //!
 //! 入口
 //!
-use actix_web::{web, App, HttpServer};
+use actix_web::{middleware::Logger, web, App, HttpServer};
 use log4rs;
 use mactix::router;
 // 导入库 crate, tests才可以测试
@@ -19,6 +19,9 @@ async fn main() -> std::io::Result<()> {
     // 构建服务
     HttpServer::new(move || {
         App::new()
+            // 开启默认日志
+            .wrap(Logger::default())
+            // 设置app_state
             .app_data(web::Data::new(mactix::AppState { db: pool.clone() }))
             // 不要在service后面使用route, 会不生效
             .route("/", web::get().to(router::greet))
@@ -33,6 +36,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::scope("/index").service(router::index2))
             .service(web::scope("persistence").service(router::persistence1))
             .service(web::scope("/log").service(router::log_test))
+            .service(web::scope("/err").service(router::error1))
     })
     .bind(
         mactix::config::APP_CONFIG

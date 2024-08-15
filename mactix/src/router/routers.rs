@@ -1,15 +1,15 @@
 //! router
 
 use actix_web::{
-    get,
-    post,
+    get, post,
     web::{Data, Form, Json},
     HttpRequest, HttpResponse, Responder,
 };
 
-use logs::{info, error};
+use crate::common::UserError;
 use crate::AppState;
 use crate::{pojo, repository};
+use logs::{error, info};
 
 pub fn routers_hello() {
     println!("hello, this is routers")
@@ -62,4 +62,14 @@ pub async fn log_test() -> impl Responder {
     info!("this is info");
     error!("this is error");
     HttpResponse::Ok()
+}
+
+#[get("/error1")]
+pub async fn error1() -> Result<String, UserError> {
+    do_thing_that_fails().map_err(|_e| UserError::InternalError)?;
+    Ok(String::from("success!"))
+}
+
+fn do_thing_that_fails() -> Result<(), UserError> {
+    Err(UserError::TestError)
 }

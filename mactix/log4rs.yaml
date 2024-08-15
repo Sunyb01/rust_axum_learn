@@ -5,12 +5,12 @@ appenders:
   stdout:
     kind: console
     encoder:
-      pattern: "[{d(%Y-%m-%d %H:%M:%S)}] [{T}] [{l}] [{t}:{L}] : {m}{n}"
+      pattern: "[{d(%Y-%m-%d %H:%M:%S)}] [{l}] [{T}] [{t}:{L}] : {m}{n}"
   rolling_file:
     # 输出到滚动文件
     kind: rolling_file
     # 日志路径
-    path: logs/mactix/all.log
+    path: logs/mactix/output.log
     # 追加模式, 即每次在已有文件末尾添加日志, 默认为 true
     append: true 
     encoder:
@@ -27,10 +27,10 @@ appenders:
         # 即触发时，创建test.1.log文件，原test.1.log文件变为test.2.log文件，依次顺延，但只保留设置的日志数量，多余的删除。
         kind: fixed_window
         # 分割文件名称
-        pattern: logs/mactix/all.{d(%Y%m%d)}.{}.log
+        pattern: logs/mactix/output.{d(%Y%m%d)}.{}.log
         # 从1开始
         base: 1
-        # 保留五个日志
+        # 保留10个日志
         count: 10
 
 # 对全局 log 进行配置
