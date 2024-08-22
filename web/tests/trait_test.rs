@@ -36,6 +36,11 @@ mod test {
         let value = item.overview();
         println!("value = {}", value);
     }
+    // dyn
+    fn call_obj4(item: &dyn Overview) {
+        let value = item.overview();
+        println!("value = {}", value);
+    }
 
     #[test]
     fn test_generics() {
@@ -43,5 +48,6 @@ mod test {
         call_obj1(&Obj {});
         call_obj2(&Obj {});
         call_obj3(Box::new(&Obj {}));
+        call_obj4(&Obj {});
     }
 }
