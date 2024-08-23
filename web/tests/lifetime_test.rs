@@ -57,4 +57,24 @@ mod tests {
 
         &s[..]
     }
+
+    #[derive(Debug)]
+    struct M1<'a> {
+        // 生命周期 'a 的意义在于确保 M1 中的 s 引用不会超过 'a 生命周期的长度。
+        // 在这个例子中，'a 生命周期的长度是由 m 的生命周期决定的，因为 s 引用是在 m 构造时创建的，并且 m 是在 test_struct_lifetime 函数的作用域内创建的。
+        s: &'a String,
+        n: i32,
+    }
+
+    fn x(m: &M1) {
+        println!("s={}, n={}", m.s, m.n);
+    }
+
+    #[test]
+    fn test_struct_lifetime() {
+        let hello = String::from("hello");
+        let s: &String = &hello;
+        let m = M1 { s, n: 1 };
+        x(&m);
+    }
 }
