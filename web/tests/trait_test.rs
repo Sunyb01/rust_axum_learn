@@ -50,4 +50,63 @@ mod test {
         call_obj3(Box::new(&Obj {}));
         call_obj4(&Obj {});
     }
+
+    trait Animal {
+        fn make_sound(&self);
+    }
+
+    fn get_animal() -> impl Animal {
+        struct Dog;
+        impl Animal for Dog {
+            fn make_sound(&self) {
+                println!("Woof!");
+            }
+        }
+        Dog
+    }
+
+    fn get_animal2() -> Box<dyn Animal> {
+        struct Dog;
+        impl Animal for Dog {
+            fn make_sound(&self) {
+                println!("Woof2!");
+            }
+        }
+        Box::new(Dog)
+    }
+
+    #[test]
+    fn test_impl() {
+        let animal = get_animal();
+        animal.make_sound(); // 输出 "Woof!"
+        let animal = get_animal2();
+        animal.make_sound(); // 输出 "Woof2!"
+    }
+
+    trait Animal2 {
+        fn make_sound(&self);
+    }
+
+    struct Dog2;
+    impl Animal2 for Dog2 {
+        fn make_sound(&self) {
+            println!("Woof!");
+        }
+    }
+
+    struct Cat2;
+    impl Animal2 for Cat2 {
+        fn make_sound(&self) {
+            println!("Meow!");
+        }
+    }
+
+    #[test]
+    fn test_dyn() {
+        let dog: Box<dyn Animal2> = Box::new(Dog2);
+        let cat: Box<dyn Animal2> = Box::new(Cat2);
+
+        dog.make_sound(); // 输出 "Woof!"
+        cat.make_sound(); // 输出 "Meow!"
+    }
 }
