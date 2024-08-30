@@ -1,4 +1,4 @@
 
 [workspace]
-members = ["mactix", "app", "cli", "server", "web"]
+members = ["mactix", "app", "cli", "server", "web", "mfutures"]
 resolver = "2"
