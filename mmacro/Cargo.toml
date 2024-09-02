@@ -1,0 +1,13 @@
+[package]
+name = "mmacro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+crate-type = ["proc-macro"]
+
+[dependencies]
+syn = "2.0.77"
+quote = "1.0.37"
+proc-macro2 = "1.0.86"
