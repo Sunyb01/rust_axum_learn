@@ -70,8 +70,8 @@ impl Server {
 
 fn get_config() -> ApplicationProperties {
     let settings = Config::builder()
-        // mactix/config.toml ==> mactix下的config.toml
-        .add_source(File::with_name("mactix/config.toml"))
+        // 项目名/文件目录/文件名
+        .add_source(File::with_name("mactix/src/config/application.toml"))
         .build()
         .expect("构建配置错误");
     settings

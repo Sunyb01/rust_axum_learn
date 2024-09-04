@@ -11,9 +11,3 @@
 ```shell
 cargo run -p web    
 ```
-
-需要再项目根目录下配置config.toml
-
-### 2. vscode调试
-
-需要在 `bin` 项目下配置config.toml
