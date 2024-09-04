@@ -71,7 +71,9 @@ impl Server {
 fn get_config() -> ApplicationProperties {
     let settings = Config::builder()
         // 项目名/文件目录/文件名
-        .add_source(File::with_name("mactix/src/config/application.toml"))
+        // 当执行cargo run时，会在项目根目录下寻找文件; 这里的根目录是最外层module的根目录
+        // 所以当把 macwetix/config.toml 换成 web/config.toml 时同样可以正常执行
+        .add_source(File::with_name("macwetix/config.toml"))
         .build()
         .expect("构建配置错误");
     settings

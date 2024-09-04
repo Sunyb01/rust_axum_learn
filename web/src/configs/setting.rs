@@ -63,7 +63,9 @@ impl Server {
 
 pub fn load_properties() -> ApplicationProperties {
     let config = Config::builder()
-        .add_source(File::with_name("web/src/configs/application.toml"))
+        // 项目名/文件目录/文件名
+        // 当执行cargo run时，会在项目根目录下寻找文件; 这里的根目录是最外层module的根目录
+        .add_source(File::with_name("web/config.toml"))
         .build()
         .expect("构建配置错误");
 
