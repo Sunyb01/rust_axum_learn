@@ -13,12 +13,6 @@ struct Fd {
     optional: bool,
 }
 
-/// 我们需要的描述一个 struct 的所有信息
-pub struct BuilderContext {
-    name: Ident,
-    fields: Vec<Fd>,
-}
-
 /// 把一个 Field 转换成 Fd
 impl From<Field> for Fd {
     fn from(f: Field) -> Self {
@@ -30,6 +24,12 @@ impl From<Field> for Fd {
             ty: ty.to_owned(),
         }
     }
+}
+
+/// 我们需要的描述一个 struct 的所有信息
+pub struct BuilderContext {
+    name: Ident,
+    fields: Vec<Fd>,
 }
 
 /// 把 DeriveInput 转换成 BuilderContext
