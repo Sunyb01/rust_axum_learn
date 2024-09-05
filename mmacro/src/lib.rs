@@ -1,67 +1,40 @@
+//! mmacro
 ///
 ///  macro test
+/// 拷贝自 https://www.bilibili.com/video/BV1Fu411m7W7/?spm_id_from=333.788&vd_source=bf6359a4a1acb0d8411f5b1ae3b85819
 ///
-extern crate proc_macro;
+// 无法pub mod
+mod builder;
+mod builder_with_attr;
+mod raw_builder;
 
 use proc_macro::TokenStream;
-use quote::quote;
-use syn::{self, Data, DeriveInput};
+use raw_builder::BuilderContext;
+use syn::{parse_macro_input, DeriveInput};
 
-#[proc_macro_derive(HelloMacro)]
-pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
-    let ast: DeriveInput = syn::parse(input).unwrap();
-    impl_hello_macro(&ast)
+#[proc_macro]
+pub fn query(input: TokenStream) -> TokenStream {
+    println!("{:#?}", input);
+    "fn hello() { println!(\"Hello world!\"); }"
+        .parse()
+        .unwrap()
 }
 
-fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
-    let name = &ast.ident;
-    let gen = quote! {
-        impl HelloMacro for #name {
-            fn hello_macro() {
-                println!("Hello, Macro! My name is {}!", stringify!(#name));
-            }
-        }
-    };
-    gen.into()
+#[proc_macro_derive(RawBuilder)]
+pub fn derive_raw_builder(input: TokenStream) -> TokenStream {
+    BuilderContext::render(input).unwrap().parse().unwrap()
 }
 
-#[proc_macro_derive(MyDefault)]
-pub fn my_default(input: TokenStream) -> TokenStream {
-    let ast: DeriveInput = syn::parse(input).unwrap();
-    let id = ast.ident;
+#[proc_macro_derive(Builder)]
+pub fn derive_builder(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    builder::BuilderContext::from(input).render().into()
+}
 
-    let Data::Struct(s) = ast.data else {
-        panic!("MyDefault derive macro must use in struct");
-    };
-
-    // 声明一个新的ast，用于动态构建字段赋值的token
-    let mut field_ast = quote!();
-
-    // 这里就是要动态添加token的地方了，需要动态完成Self的字段赋值
-    for (idx, f) in s.fields.iter().enumerate() {
-        let (field_id, field_ty) = (&f.ident, &f.ty);
-        if field_id.is_none() {
-            let field_idx = syn::Index::from(idx);
-            //没有ident表示是匿名字段，对于匿名字段，都需要添加 `#field_idx: #field_type::default(),` 这样的代码
-            field_ast.extend(quote! {
-                #field_idx: Default::default(),
-            });
-        } else {
-            //对于命名字段，都需要添加 `#field_name: #field_type::default(),` 这样的代码
-            let field_name = &f.ident;
-            field_ast.extend(quote! {
-                #field_name: #field_ty::default(),
-            });
-        }
-    }
-
-    quote! {
-        impl Default for # id {
-            fn default() -> Self {
-                Self {
-                }
-            }
-        }
-    }
-    .into()
+#[proc_macro_derive(BuilderWithAttr, attributes(builder))]
+pub fn derive_builder_with_attr(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    builder_with_attr::BuilderContext::from(input)
+        .render()
+        .into()
 }
