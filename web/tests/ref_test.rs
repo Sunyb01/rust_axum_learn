@@ -1,3 +1,5 @@
+use std::cell::RefCell;
+
 struct MyStruct {
     name: String,
 }
@@ -48,4 +50,21 @@ fn test_ref_is_changed() {
     fn_ref_test3(&m);
 
     fn_ref_test4(&m);
+}
+
+struct MC1(String);
+
+struct MyRefCell {
+    c: RefCell<MC1>,
+}
+
+#[test]
+fn test_ref_cell() {
+    let mc1 = MC1(String::from("hello"));
+    let mrc = MyRefCell {
+        c: RefCell::new(mc1),
+    };
+
+    let c = mrc.c.borrow();
+    println!("c is: {:?}", c.0);
 }
