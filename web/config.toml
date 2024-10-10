@@ -6,5 +6,5 @@ username = "compass_bag_dev"
 password = "CompassBag2024"
 
 [server]
-host = "0.0.0.0"
+host = "localhost"
 port = 8898
