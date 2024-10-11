@@ -56,6 +56,8 @@ mod tests {
         match x {
             1..=5 => println!("1..=5"),
             6..=10 => println!("6..=10"),
+            // 支持右边为开区间
+            11..17 => println!("11..17"),
             _ => println!("other"),
         }
     }
