@@ -53,11 +53,14 @@ mod tests {
     #[test]
     fn test_match_range1() {
         let x = 10;
+        // 当匹配多个时, 会选择第一个匹配的模式块
         match x {
             1..=5 => println!("1..=5"),
             6..=10 => println!("6..=10"),
             // 支持右边为开区间
             11..17 => println!("11..17"),
+            // 匹配17 或 19 或 20中的一个
+            17 | 19 | 20 => println!("17 | 19 | 20"),
             _ => println!("other"),
         }
     }
