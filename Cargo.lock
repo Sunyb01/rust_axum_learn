@@ -3395,6 +3395,7 @@ dependencies = [
  "app",
  "axum",
  "config",
+ "futures",
  "libc",
  "serde",
  "server",
