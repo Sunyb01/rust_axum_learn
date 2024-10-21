@@ -16,3 +16,4 @@ server = { path = "../server" }
 libc = "0.2.0"
 tower-http = { version = "0.6.1", features = ["trace"] }
 futures = "0.3"
+rand = "0.8.5"

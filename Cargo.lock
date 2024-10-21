@@ -3397,6 +3397,7 @@ dependencies = [
  "config",
  "futures",
  "libc",
+ "rand",
  "serde",
  "server",
  "tokio",
